@@ -217,18 +217,18 @@ class Model extends React.Component {
     // debugger
     // return
 
-    var { width, height, antialias, background } = this.props
+    var { width, height, antialias, background, transparent } = this.props
 
     this.scene = new THREE.Scene()
     this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 8888)
-    this.renderer = new THREE.WebGLRenderer({ antialias })
+    this.renderer = new THREE.WebGLRenderer({ antialias, alpha: transparent })
 
     //console.log(background);
-    if (transparent) {
-      scene.background = new THREE.Color(0xff0000)
-    }
 
-    this.renderer.setClearColor(new THREE.Color(background))
+    this.renderer.setClearColor(
+      new THREE.Color(background),
+      transparent ? 0 : 1
+    )
 
     this.renderer.setSize(width, height)
 
